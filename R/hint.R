@@ -1,30 +1,3 @@
-service <- function(sheet_id, yt, poll) {
-  project_id <- find_project_id(yt, "mrc")
-  template <- paste(readLines("template"), collapse = "\n")
-  repeat {
-    service_step(sheet_id, yt, template, project_id)
-    Sys.sleep(poll)
-  }
-}
-
-
-service_step <- function(sheet_id, yt, template, project_id) {
-  gs2yt_log("Reading googlesheet issues")
-  issues <- read_googlesheet_issues(sheet_id)
-  gs2yt_log(sprintf("Found %s issues", nrow(issues)))
-  if (!is.null(issues)) {
-    map <- read_map()
-    new_rows <- setdiff(seq_len(nrow(issues)), map$row)
-    new_issues <- issues[new_rows, ]
-    if (nrow(new_issues) > 0L) {
-      ids <- create_issues(new_issues, yt, template, project_id)
-      map <- data.frame(row = new_rows, issue = ids, stringsAsFactors = FALSE)
-      write_map(map)
-    }
-  }
-}
-
-
 create_issues <- function(to_import, yt, template, project_id) {
   n <- nrow(to_import)
   if (n == 0) {
@@ -116,9 +89,12 @@ gs2yt_log <- function(text) {
 }
 
 
+PATH_MAP <- "data/map.csv"
+
+
 read_map <- function() {
-  if (file.exists("map.csv")) {
-    map <- read.csv("map.csv", stringsAsFactors = FALSE)
+  if (file.exists(PATH_MAP)) {
+    map <- read.csv(PATH_MAP, stringsAsFactors = FALSE)
   } else {
     map <- data.frame(row = integer(0),
                       issue = character(0),
@@ -128,5 +104,5 @@ read_map <- function() {
 
 
 write_map <- function(map) {
-  write.csv(map, "map.csv", row.names = FALSE)
+  write.csv(map, PATH_MAP, row.names = FALSE)
 }
