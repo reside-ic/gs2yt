@@ -12,7 +12,7 @@ GS2YT_YT_TOKEN=${GS2YT_YT_TOKEN}
 EOF
 
 mkdir -p data
-docker run --rm -it \
+docker run --rm -d \
        --name=gs2yt \
        --env-file=.env \
        --user="$(id -u):$(id -g)" \
