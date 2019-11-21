@@ -13,10 +13,13 @@ GS2YT_YT_TOKEN=${GS2YT_YT_TOKEN}
 EOF
 fi
 
+IMAGE=reside/gs2yt:mrc-743
+docker pull $IMAGE
+
 mkdir -p data
-docker run --rm -d --pull \
+docker run --rm -d \
        --name=gs2yt \
        --env-file=.env \
        --user="$(id -u):$(id -g)" \
        -v ${PWD}/data:/gs2yt/data \
-       reside/gs2yt:mrc-743
+       $IMAGE
