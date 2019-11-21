@@ -14,7 +14,7 @@ EOF
 fi
 
 mkdir -p data
-docker run --rm -d \
+docker run --rm -d --pull \
        --name=gs2yt \
        --env-file=.env \
        --user="$(id -u):$(id -g)" \
