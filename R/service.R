@@ -21,7 +21,7 @@ service_step <- function(sheet_id, yt, template, project_id) {
       map <- data.frame(row = new_rows, issue = ids, stringsAsFactors = FALSE)
       write_map(map)
     } else {
-      log("(no new issues)")
+      gs2yt_log("(no new issues)")
     }
   }
 }
