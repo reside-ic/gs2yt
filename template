@@ -1,0 +1,17 @@
+Submitted via the HINT reporting form:
+
+* **Time**: {Timestamp}
+* **Name**: {Your_name}
+* **Institution** {Your_institution}
+* **Component**: {Application_section}
+* **Type**: {Issue_type}
+
+## Description
+
+{Description_of_bug_change}
+
+## Steps to reproduce
+
+{Steps_to_reproduce}
+
+Additional information: {Additional_information}
