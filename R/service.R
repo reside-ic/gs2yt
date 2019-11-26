@@ -36,8 +36,9 @@ main <- function() {
 
 
 prepare <- function() {
-  cl <- vaultr::vault_client(login = "github")
-  Sys.setenv(c(
+  cl <- vaultr::vault_client(addr = "https://vault.dide.ic.ac.uk:8200",
+                             login = "github")
+  Sys.setenv(
     "GS2YT_SHEET_ID" = cl$read("/secret/hint/gs2yt/googlesheet")$id,
-    "GS2YT_YT_TOKEN" = cl$read("/secret/hint/gs2yt/youtrack")$token))
+    "GS2YT_YT_TOKEN" = cl$read("/secret/hint/gs2yt/youtrack")$token)
 }
