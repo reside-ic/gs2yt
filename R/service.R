@@ -18,8 +18,8 @@ service_step <- function(sheet_id, yt, template, project_id) {
     new_issues <- issues[new_rows, ]
     if (nrow(new_issues) > 0L) {
       ids <- create_issues(new_issues, yt, template, project_id)
-      map <- data.frame(row = new_rows, issue = ids, stringsAsFactors = FALSE)
-      write_map(map)
+      map_new <- data.frame(row = new_rows, issue = ids, stringsAsFactors = FALSE)
+      write_map(rbind(map, map_new))
     } else {
       gs2yt_log("(no new issues)")
     }
