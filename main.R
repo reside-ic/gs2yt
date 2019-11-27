@@ -7,4 +7,6 @@ local({
   attach(env, name = "gs2yt")
 })
 
-main()
+if (!interactive()) {
+  main()
+}

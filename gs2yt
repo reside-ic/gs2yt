@@ -13,7 +13,7 @@ GS2YT_YT_TOKEN=${GS2YT_YT_TOKEN}
 EOF
 fi
 
-IMAGE=reside/gs2yt:mrc-743
+IMAGE=reside/gs2yt:mrc-1130
 docker pull $IMAGE
 
 mkdir -p data
