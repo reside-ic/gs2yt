@@ -30,7 +30,7 @@ service_step <- function(sheet_id, yt, template, project_id) {
 main <- function() {
   sheet_id <- Sys.getenv("GS2YT_SHEET_ID")
   yt_token <- Sys.getenv("GS2YT_YT_TOKEN")
-  yt <- YouTrackAPI$new("vimc", yt_token)
+  yt <- YouTrackAPI$new("mrc-ide", yt_token)
   service(sheet_id, yt)
 }
 

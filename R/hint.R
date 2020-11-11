@@ -23,6 +23,15 @@ create_issues <- function(to_import, yt, template, project_id) {
 
 
 create_issue <- function(d, yt, template, project_id) {
+  ## Remove any forward slash separated by 1 character whitespace on either
+  ## side and any text after this, this is to remove French translations from
+  ## the form e.g
+  ## Your institution / Votre institution -> Your institution
+  ## Description of bug/change / Description du bug/changement 
+  ##    -> Description of bug/change
+  ## Email -> Email
+  names(d) <- gsub("\\s/\\s.+", "", names(d))
+  ## Now replace any spaces or / with _
   names(d) <- gsub("[ /]", "_", names(d))
 
   title <- clean_title(d$Description_of_bug_change)
@@ -44,7 +53,7 @@ create_issue <- function(d, yt, template, project_id) {
 
   body <- list(issues = list(
                  list(id = scalar(dat$id))),
-               query = scalar("subtask of: mrc-748"))
+               query = scalar("subtask of: mrc-1913"))
   yt$POST("/commands", body)
   dat$idReadable
 }
